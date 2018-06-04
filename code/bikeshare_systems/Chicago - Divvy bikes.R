@@ -22,6 +22,7 @@ station_status_chi <-
 
 if (length(station_status_chi$error) >= 1) {
     error_chi <- TRUE
+    cat("\n*ERROR*")
     
 } else {
     error_chi <- FALSE
@@ -31,9 +32,14 @@ if (length(station_status_chi$error) >= 1) {
     #---------------------------------#
     
     divvybike_db <-
-        dbConnect(RSQLite::SQLite(), "data/divvybike_db_040118.sqlite3")
+        dbConnect(RSQLite::SQLite(), "data/divvybike_db_060118.sqlite3")
     
     col_names <- tbl(divvybike_db, "station_status") %>% head(0) %>% colnames()
+    
+    # divvybike_db_1 <-
+    #     dbConnect(RSQLite::SQLite(), "data/divvybike_db_040118.sqlite3")
+    # 
+    # col_names <- tbl(divvybike_db_1, "station_status") %>% head(0) %>% colnames()
     
     #---------------------------------#
     #---- Station Status ----

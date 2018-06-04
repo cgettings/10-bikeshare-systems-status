@@ -22,6 +22,7 @@ station_status_bos <-
 
 if (length(station_status_bos$error) >= 1) {
     error_bos <- TRUE
+    cat("\n*ERROR*")
     
 } else {
     error_bos <- FALSE
@@ -31,9 +32,14 @@ if (length(station_status_bos$error) >= 1) {
     #---------------------------------#
     
     hubway_db <-
-        dbConnect(RSQLite::SQLite(), "data/hubway_db_040118.sqlite3")
+        dbConnect(RSQLite::SQLite(), "data/hubway_db_060118.sqlite3")
     
     col_names <- tbl(hubway_db, "station_status") %>% head(0) %>% colnames()
+    
+    # hubway_db_1 <-
+    #     dbConnect(RSQLite::SQLite(), "data/hubway_db_040118.sqlite3")
+    # 
+    # col_names <- tbl(hubway_db_1, "station_status") %>% head(0) %>% colnames()
     
     #---------------------------------#
     #---- Station Status ----

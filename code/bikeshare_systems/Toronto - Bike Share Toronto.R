@@ -22,6 +22,7 @@ station_status_tor <-
 
 if (length(station_status_tor$error) >= 1) {
     error_tor <- TRUE
+    cat("\n*ERROR*")
     
 } else {
     error_tor <- FALSE
@@ -31,9 +32,15 @@ if (length(station_status_tor$error) >= 1) {
     #---------------------------------#
     
     bike_share_toronto_db <-
-        dbConnect(RSQLite::SQLite(), "data/bike_share_toronto_db_040118.sqlite3")
+        dbConnect(RSQLite::SQLite(), "data/bike_share_toronto_db_060118.sqlite3")
     
     col_names <- tbl(bike_share_toronto_db, "station_status") %>% head(0) %>% colnames()
+
+    # bike_share_toronto_db_1 <-
+    #     dbConnect(RSQLite::SQLite(), "data/bike_share_toronto_db_040118.sqlite3")
+    # 
+    # col_names <- tbl(bike_share_toronto_db_1, "station_status") %>% head(0) %>% colnames()
+
     
     #---------------------------------#
     #---- Station Status ----

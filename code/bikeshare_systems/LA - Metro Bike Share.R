@@ -22,6 +22,7 @@ station_status_la <-
 
 if (length(station_status_la$error) >= 1) {
     error_la <- TRUE
+    cat("\n*ERROR*")
     
 } else {
     error_la <- FALSE
@@ -33,9 +34,9 @@ if (length(station_status_la$error) >= 1) {
     # setwd("all_bike_shares")
     
     metro_bike_share_db <- 
-        dbConnect(RSQLite::SQLite(), "data/metro_bike_share_db_040118.sqlite3")
+        dbConnect(RSQLite::SQLite(), "data/metro_bike_share_db_060118.sqlite3")
     
-    col_names <- tbl(metro_bike_share_db, "station_status") %>% head(0) %>% colnames()
+    # col_names <- tbl(metro_bike_share_db, "station_status") %>% head(0) %>% colnames()
     
     #---------------------------------#
     #---- Station Status ----
@@ -46,11 +47,11 @@ if (length(station_status_la$error) >= 1) {
         read_file() %>%
         fromJSON()
     
-    station_status_la_1 <-
-        station_status_la_0$data$stations %>%
-        select(one_of(col_names))
+     station_status_la_1 <-
+         station_status_la_0$data$stations %>% 
+         select_if(.predicate = function(x) class(x) != "list")
     
-    rm(col_names)
+    # rm(col_names)
     
     station_status_la_2 <-
         station_status_la_1 %>%
@@ -67,7 +68,7 @@ if (length(station_status_la$error) >= 1) {
         as_tibble() %>%
         distinct(station_id, last_reported, .keep_all = TRUE)
     
-    rm(station_status_la_1)
+   # rm(station_status_la_1)
     
     #========================================#
     #### Writing to database ####

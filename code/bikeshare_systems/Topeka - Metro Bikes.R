@@ -22,6 +22,7 @@ station_status_top <-
 
 if (length(station_status_top$error) >= 1) {
     error_top <- TRUE
+    cat("\n*ERROR*")
     
 } else {
     error_top <- FALSE
@@ -31,9 +32,16 @@ if (length(station_status_top$error) >= 1) {
     #---------------------------------#
     
     topeka_metro_bikes_db <- 
-        dbConnect(RSQLite::SQLite(), "data/topeka_metro_bikes_db_040118.sqlite3")
+        dbConnect(RSQLite::SQLite(), "data/topeka_metro_bikes_db_060118.sqlite3")
     
     col_names <- tbl(topeka_metro_bikes_db, "station_status") %>% head(0) %>% colnames()
+    
+    
+    # topeka_metro_bikes_db_1 <-
+    #     dbConnect(RSQLite::SQLite(), "data/topeka_metro_bikes_db_040118.sqlite3")
+    # 
+    # col_names <- tbl(topeka_metro_bikes_db_1, "station_status") %>% head(0) %>% colnames()
+    
     
     #---------------------------------#
     #---- Station Status ----

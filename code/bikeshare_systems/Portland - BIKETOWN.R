@@ -22,6 +22,7 @@ station_status_por <-
 
 if (length(station_status_por$error) >= 1) {
     error_por <- TRUE
+    cat("\n*ERROR*")
     
 } else {
     error_por <- FALSE
@@ -33,9 +34,15 @@ if (length(station_status_por$error) >= 1) {
     # setwd("all_bike_shares")
     
     biketown_db <- 
-        dbConnect(RSQLite::SQLite(), "data/biketown_db_040118.sqlite3")
+        dbConnect(RSQLite::SQLite(), "data/biketown_db_060118.sqlite3")
     
     col_names <- tbl(biketown_db, "station_status") %>% head(0) %>% colnames()
+    
+    # biketown_db_1 <-
+    #     dbConnect(RSQLite::SQLite(), "data/biketown_db_040118.sqlite3")
+    # 
+    # col_names <-
+    #     tbl(biketown_db_1, "station_status") %>% head(0) %>% colnames()
     
     #---------------------------------#
     #---- Station Status ----
@@ -51,7 +58,7 @@ if (length(station_status_por$error) >= 1) {
         select(one_of(col_names))
     
     rm(col_names)
-    
+
     station_status_por_2 <-
         station_status_por_1 %>%
         add_column(

@@ -22,6 +22,7 @@ station_status_atl <-
 
 if (length(station_status_atl$error) >= 1) {
     error_atl <- TRUE
+    cat("\n*ERROR*")
     
 } else {
     error_atl <- FALSE
@@ -31,9 +32,15 @@ if (length(station_status_atl$error) >= 1) {
     #---------------------------------#
     
     relay_bike_share_db <- 
-        dbConnect(RSQLite::SQLite(), "data/relay_bike_share_db_040118.sqlite3")
+        dbConnect(RSQLite::SQLite(), "data/relay_bike_share_db_060118.sqlite3")
     
     col_names <- tbl(relay_bike_share_db, "station_status") %>% head(0) %>% colnames()
+    
+    # relay_bike_share_db_1 <- 
+    #     dbConnect(RSQLite::SQLite(), "data/relay_bike_share_db_040118.sqlite3")
+    # 
+    # col_names <- tbl(relay_bike_share_db_1, "station_status") %>% head(0) %>% colnames()
+    
     
     #---------------------------------#
     #---- Station Status ----

@@ -22,6 +22,7 @@ station_status_sf <-
 
 if (length(station_status_sf$error) >= 1) {
     error_sf <- TRUE
+    cat("\n*ERROR*")
     
 } else {
     error_sf <- FALSE
@@ -31,9 +32,15 @@ if (length(station_status_sf$error) >= 1) {
     #---------------------------------#
     
     ford_gobike_db <- 
-        dbConnect(RSQLite::SQLite(), "data/ford_gobike_db_040118.sqlite3")
+        dbConnect(RSQLite::SQLite(), "data/ford_gobike_db_060118.sqlite3")
     
     col_names <- tbl(ford_gobike_db, "station_status") %>% head(0) %>% colnames()
+    
+    # ford_gobike_db_1 <-
+    #     dbConnect(RSQLite::SQLite(), "data/ford_gobike_db_040118.sqlite3")
+    # 
+    # col_names <- tbl(ford_gobike_db_1, "station_status") %>% head(0) %>% colnames()
+    
     
     #---------------------------------#
     #---- Station Status ----
